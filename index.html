@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Operaciones Dulces</title>
+  <style>
+    :root {
+      --pastel-rosa: #fddde6;
+      --pastel-menta: #d9f7f2;
+      --pastel-amarillo: #fff7d6;
+      --pastel-lila: #e8e3ff;
+      --texto: #5a3c4d;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Nunito", "Poppins", "Quicksand", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(160deg, var(--pastel-rosa), var(--pastel-menta));
+      color: var(--texto);
+    }
+
+    .wrapper {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(154, 122, 154, 0.25);
+      width: min(95%, 680px);
+      padding: 2.5rem 3rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wrapper::before,
+    .wrapper::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 14% 18%, rgba(255, 211, 234, 0.6) 0, rgba(255, 211, 234, 0) 60%),
+        radial-gradient(circle at 82% 12%, rgba(220, 236, 255, 0.6) 0, rgba(220, 236, 255, 0) 62%),
+        radial-gradient(circle at 15% 85%, rgba(255, 247, 214, 0.7) 0, rgba(255, 247, 214, 0) 65%),
+        radial-gradient(circle at 88% 78%, rgba(217, 247, 242, 0.6) 0, rgba(217, 247, 242, 0) 60%);
+      z-index: 0;
+    }
+
+    .wrapper::after {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cdefs%3E%3Cpattern id='dessert' patternUnits='userSpaceOnUse' width='80' height='80'%3E%3Cg fill='none' stroke-width='4' stroke-linecap='round'%3E%3Cpath stroke='%23f5a9c5' d='M16 52c6-12 18-12 24 0 6 12-6 12-12 12s-18 0-12-12z'/%3E%3Cpath stroke='%23fbe29c' d='M26 32a6 6 0 1 1-12 0 6 6 0 0 1 12 0z'/%3E%3Cpath stroke='%23a8dedc' d='M56 24c2 8 14 8 16 0'/%3E%3Cpath stroke='%23f3c3f2' d='M56 56h16s0 12-8 12-8-12-8-12z'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect width='160' height='160' fill='url(%23dessert)' opacity='0.28'/%3E%3C/svg%3E");
+      opacity: 0.7;
+      mix-blend-mode: screen;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    p.subtitle {
+      text-align: center;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    form {
+      display: grid;
+      gap: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .exercise {
+      display: grid;
+      gap: 0.6rem;
+      padding: 1rem 1.2rem 1rem 3.4rem;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255, 247, 214, 0.9), rgba(232, 227, 255, 0.9));
+      border: 2px solid rgba(255, 182, 222, 0.35);
+      box-shadow: 0 10px 20px rgba(153, 119, 153, 0.15);
+      position: relative;
+    }
+
+    .exercise::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 1.2rem;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: inset 0 0 0 2px rgba(255, 182, 222, 0.45), 0 6px 12px rgba(170, 140, 170, 0.18);
+      background-image: var(--dessert-icon, none);
+      background-size: 30px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .exercise[data-dessert="cupcake"] {
+      --dessert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath fill='%23fdd7e4' d='M20 46h32l-4 16H24l-4-16z'/%3E%3Cpath fill='%23ffe7f3' d='M24 34c0-10 12-15 20-15s20 5 20 15-12 15-20 15-20-5-20-15z'/%3E%3Cpath fill='%23f8bad1' d='M36 17a8 8 0 1 1 16 0v4H36z'/%3E%3Ccircle fill='%23fcd59b' cx='30' cy='32' r='3'/%3E%3Ccircle fill='%23a6dedb' cx='40' cy='29' r='3'/%3E%3Ccircle fill='%23f696c1' cx='50' cy='32' r='3'/%3E%3C/svg%3E");
+    }
+
+    .exercise[data-dessert="macaron"] {
+      --dessert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cellipse fill='%23f3c9ff' cx='36' cy='30' rx='22' ry='11'/%3E%3Cellipse fill='%23fff' cx='36' cy='34' rx='22' ry='9'/%3E%3Cellipse fill='%23dab9f9' cx='36' cy='38' rx='22' ry='11'/%3E%3C/svg%3E");
+    }
+
+    .exercise[data-dessert="tart"] {
+      --dessert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cpath fill='%23fcd49a' d='M18 44h36l-4 14H22l-4-14z'/%3E%3Cpath fill='%23ffeacc' d='M22 32c0-9 10-14 14-14s14 5 14 14-10 14-14 14-14-5-14-14z'/%3E%3Ccircle fill='%23f479a9' cx='28' cy='33' r='4'/%3E%3Ccircle fill='%23a8dedc' cx='42' cy='31' r='4'/%3E%3Ccircle fill='%23f9c6d9' cx='36' cy='37' r='4'/%3E%3C/svg%3E");
+    }
+
+    .exercise[data-dessert="donut"] {
+      --dessert-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Ccircle fill='%23f3c3f2' cx='36' cy='36' r='18'/%3E%3Ccircle fill='%23fff7d6' cx='36' cy='36' r='8'/%3E%3Ccircle fill='%23f9bad2' cx='36' cy='36' r='12' opacity='.55'/%3E%3Ccircle fill='%23fcd49b' cx='36' cy='24' r='2'/%3E%3Ccircle fill='%23a8dedc' cx='28' cy='32' r='2'/%3E%3Ccircle fill='%23f696c1' cx='44' cy='40' r='2'/%3E%3C/svg%3E");
+    }
+
+    label {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    input[type="number"] {
+      border: none;
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      font-size: 1.05rem;
+      background: rgba(255, 255, 255, 0.88);
+      color: var(--texto);
+      box-shadow: inset 0 3px 6px rgba(200, 170, 200, 0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      transform: translateY(-1px);
+      box-shadow: inset 0 3px 12px rgba(200, 170, 200, 0.28);
+    }
+
+    .input-error {
+      box-shadow: inset 0 0 0 3px rgba(244, 121, 169, 0.65);
+      background: rgba(255, 225, 232, 0.95);
+    }
+
+    button {
+      justify-self: center;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #f9b8d4, #fcd3a5);
+      color: #5a3c4d;
+      cursor: pointer;
+      box-shadow: 0 12px 20px rgba(248, 164, 194, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 24px rgba(248, 164, 194, 0.4);
+    }
+
+    .results-space {
+      margin-top: 2.2rem;
+      min-height: 160px;
+      border-radius: 22px;
+      border: 3px dashed rgba(255, 182, 222, 0.6);
+      background: rgba(255, 255, 255, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .results-space img {
+      width: 120px;
+      height: auto;
+      filter: drop-shadow(0 8px 12px rgba(139, 111, 139, 0.2));
+    }
+
+    .results-space p {
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      margin: 0;
+    }
+
+    .results-space.is-success {
+      border-color: rgba(168, 222, 220, 0.65);
+      background: rgba(217, 247, 242, 0.75);
+    }
+
+    .results-space.is-error {
+      border-color: rgba(244, 121, 169, 0.55);
+      background: rgba(255, 225, 232, 0.75);
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .dessert-corners {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .dessert-corners span {
+      position: absolute;
+      width: 68px;
+      height: 68px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='36' fill='%23fff' opacity='0.72'/%3E%3Cpath d='M20 44h40l-4 12H24l-4-12z' fill='%23f9c6d9'/%3E%3Cpath d='M24 32c0-8 8-12 16-12s16 4 16 12-8 12-16 12-16-4-16-12z' fill='%23ffe5f2'/%3E%3Ccircle cx='32' cy='30' r='4' fill='%23f38dbf'/%3E%3Ccircle cx='40' cy='28' r='4' fill='%23fcd49b'/%3E%3Ccircle cx='48' cy='30' r='4' fill='%23a4e0dc'/%3E%3C/svg%3E");
+      background-size: cover;
+      opacity: 0.85;
+    }
+
+    .dessert-corners span:nth-child(1) {
+      top: -12px;
+      left: -12px;
+    }
+
+    .dessert-corners span:nth-child(2) {
+      top: -12px;
+      right: -12px;
+    }
+
+    .dessert-corners span:nth-child(3) {
+      bottom: -12px;
+      left: -12px;
+    }
+
+    .dessert-corners span:nth-child(4) {
+      bottom: -12px;
+      right: -12px;
+    }
+
+    @media (max-width: 600px) {
+      .wrapper {
+        padding: 2rem 1.6rem 3rem;
+      }
+
+      .dessert-corners span {
+        width: 54px;
+        height: 54px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <div class="dessert-corners" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <h1>Operaciones Dulces</h1>
+    <p class="subtitle">Resuelve cada operación y comprueba tus respuestas. ¡Los ositos te darán una pista!</p>
+
+    <form id="math-form">
+      <div class="exercise" data-dessert="cupcake">
+        <label for="answer-0">1. 7 + 8 =</label>
+        <input type="number" id="answer-0" required />
+      </div>
+      <div class="exercise" data-dessert="macaron">
+        <label for="answer-1">2. 15 − 6 =</label>
+        <input type="number" id="answer-1" required />
+      </div>
+      <div class="exercise" data-dessert="tart">
+        <label for="answer-2">3. 4 × 3 =</label>
+        <input type="number" id="answer-2" required />
+      </div>
+      <div class="exercise" data-dessert="donut">
+        <label for="answer-3">4. 36 ÷ 6 =</label>
+        <input type="number" id="answer-3" required />
+      </div>
+      <button type="submit">Comprobar respuestas</button>
+    </form>
+
+    <section class="results-space" aria-live="polite" id="feedback" aria-label="Resultado de las operaciones">
+      <span class="visually-hidden">Aquí aparecerán los ositos con tu resultado.</span>
+    </section>
+  </main>
+
+  <template id="bear-success">
+    <img alt="Osito feliz sosteniendo un corazón" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Crect width='240' height='240' rx='32' ry='32' fill='%23fff7fc'/%3E%3Ccircle cx='120' cy='120' r='88' fill='%23f8c6d9'/%3E%3Ccircle cx='86' cy='98' r='22' fill='%23fce0ed'/%3E%3Ccircle cx='154' cy='98' r='22' fill='%23fce0ed'/%3E%3Ccircle cx='120' cy='140' r='60' fill='%23fbd5e4'/%3E%3Cellipse cx='96' cy='132' rx='12' ry='10' fill='%23805c6a'/%3E%3Cellipse cx='144' cy='132' rx='12' ry='10' fill='%23805c6a'/%3E%3Cpath d='M116 154c6 10 18 10 24 0' stroke='%23805c6a' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Ccircle cx='116' cy='124' r='4' fill='%23805c6a'/%3E%3Ccircle cx='124' cy='124' r='4' fill='%23805c6a'/%3E%3Cpath d='M120 110c8-10 18-10 26 0' stroke='%23805c6a' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Cpath d='M120 110c-8-10-18-10-26 0' stroke='%23805c6a' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Cpath d='M92 176c16 26 40 26 56 0' fill='%23f479a9'/%3E%3Ctext x='120' y='212' text-anchor='middle' font-size='28' font-family='Nunito, sans-serif' fill='%23805c6a'%3E%C2%A1Muy bien!%3C/text%3E%3C/svg%3E" />
+    <p>¡Muy bien! Los ositos están orgullosos de ti.</p>
+  </template>
+
+  <template id="bear-error">
+    <img alt="Osito con un cartel que dice Ño" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Crect width='240' height='240' rx='32' ry='32' fill='%23f1f7ff'/%3E%3Ccircle cx='92' cy='140' r='64' fill='%23f9d6ba'/%3E%3Ccircle cx='64' cy='96' r='20' fill='%23fde6d3'/%3E%3Ccircle cx='120' cy='96' r='20' fill='%23fde6d3'/%3E%3Cellipse cx='76' cy='136' rx='10' ry='9' fill='%23644b3f'/%3E%3Cellipse cx='108' cy='136' rx='10' ry='9' fill='%23644b3f'/%3E%3Cpath d='M76 156c12-12 20-12 32 0' stroke='%23644b3f' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Crect x='128' y='96' width='84' height='88' rx='12' fill='%23fff' stroke='%23644b3f' stroke-width='6'/%3E%3Ctext x='170' y='148' text-anchor='middle' font-size='46' font-family='Nunito, sans-serif' fill='%23644b3f'%3E%C3%B1o%3C/text%3E%3Cpath d='M44 76c0-10 12-14 20-14s20 4 20 14' stroke='%23644b3f' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3Cpath d='M100 76c0-10 12-14 20-14s20 4 20 14' stroke='%23644b3f' stroke-width='6' stroke-linecap='round' fill='none'/%3E%3C/svg%3E" />
+    <p>Ups, revisa tus resultados. ¡El osito te anima a intentarlo de nuevo!</p>
+  </template>
+
+  <script>
+    const correctAnswers = [15, 9, 12, 6];
+
+    const form = document.getElementById('math-form');
+    const feedback = document.getElementById('feedback');
+    const successTemplate = document.getElementById('bear-success');
+    const errorTemplate = document.getElementById('bear-error');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const userAnswers = correctAnswers.map((_, index) => {
+        const input = document.getElementById(`answer-${index}`);
+        return Number(input.value.trim());
+      });
+
+      const allCorrect = userAnswers.every((answer, index) => answer === correctAnswers[index]);
+
+      feedback.innerHTML = '';
+      feedback.classList.remove('is-success', 'is-error');
+
+      const templateContent = (allCorrect ? successTemplate : errorTemplate).content.cloneNode(true);
+      feedback.appendChild(templateContent);
+      feedback.classList.add(allCorrect ? 'is-success' : 'is-error');
+
+      if (!allCorrect) {
+        form.querySelectorAll('input').forEach((input, index) => {
+          if (Number(input.value.trim()) !== correctAnswers[index]) {
+            input.setAttribute('aria-invalid', 'true');
+            input.classList.add('input-error');
+          } else {
+            input.removeAttribute('aria-invalid');
+            input.classList.remove('input-error');
+          }
+        });
+      } else {
+        form.reset();
+        form.querySelectorAll('input').forEach((input) => {
+          input.removeAttribute('aria-invalid');
+          input.classList.remove('input-error');
+        });
+      }
+    });
+
+    form.querySelectorAll('input').forEach((input) => {
+      input.addEventListener('input', () => {
+        input.removeAttribute('aria-invalid');
+        input.classList.remove('input-error');
+        feedback.innerHTML = '';
+        feedback.classList.remove('is-success', 'is-error');
+      });
+    });
+  </script>
+</body>
+</html>
