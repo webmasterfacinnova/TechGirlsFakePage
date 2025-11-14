@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecturas Populares</title>
+    <style>
+        :root {
+            color-scheme: light dark;
+            --bg-color: #f5f5f5;
+            --card-bg: #ffffff;
+            --accent: #6c63ff;
+            --text-color: #1f1f1f;
+            --muted: #4f4f4f;
+            --panel-bg: radial-gradient(circle at top left, rgba(108, 99, 255, 0.35), transparent 60%),
+                radial-gradient(circle at bottom right, rgba(255, 99, 146, 0.3), transparent 55%),
+                #151a3b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Poppins", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(255, 99, 146, 0.1));
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        main {
+            max-width: 1100px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 28px;
+            box-shadow: 0 20px 60px rgba(31, 31, 31, 0.12);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            overflow: hidden;
+        }
+
+        .book-panel {
+            background: var(--panel-bg);
+            color: #fefefe;
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            outline: none;
+        }
+
+        .book-panel:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 45px rgba(17, 24, 39, 0.4);
+        }
+
+        .book-panel:focus-visible {
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.35), 0 18px 45px rgba(17, 24, 39, 0.4);
+            transform: translateY(-6px);
+        }
+
+        .book-spine {
+            width: 220px;
+            height: 320px;
+            border-radius: 16px 12px 12px 16px;
+            background: linear-gradient(130deg, rgba(255, 255, 255, 0.15), rgba(0, 0, 0, 0.35));
+            border-left: 18px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+        }
+
+        .book-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 0.75rem;
+        }
+
+        .book-author {
+            font-size: 0.95rem;
+            font-weight: 400;
+            opacity: 0.85;
+        }
+
+        .book-instruction {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.75;
+        }
+
+        .details-panel {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(108, 99, 255, 0.12);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            width: fit-content;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+        }
+
+        .counter {
+            margin: 0;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .synopsis,
+        .review {
+            line-height: 1.75;
+            color: var(--muted);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem;
+            }
+
+            main {
+                border-radius: 22px;
+            }
+
+            .book-panel {
+                padding: 2.5rem 2rem;
+            }
+
+            .book-spine {
+                width: 180px;
+                height: 260px;
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section
+            class="book-panel"
+            id="book-panel"
+            role="button"
+            tabindex="0"
+            aria-describedby="book-instruction"
+        >
+            <div class="book-spine">
+                <div class="book-title" id="book-title">Libro</div>
+                <div class="book-author" id="book-author">Autor</div>
+            </div>
+            <p class="book-instruction" id="book-instruction">Haz click para descubrir otro libro</p>
+        </section>
+        <section class="details-panel" aria-live="polite">
+            <span class="tag">Sinopsis y reseña</span>
+            <article>
+                <p class="counter" id="book-counter">Libro 1 de 1</p>
+                <h1 id="details-title">Título del libro</h1>
+                <p class="synopsis" id="book-synopsis">Sinopsis aquí.</p>
+            </article>
+            <article>
+                <h2>Reseña</h2>
+                <p class="review" id="book-review">Reseña aquí.</p>
+            </article>
+        </section>
+    </main>
+
+    <script>
+
+        const books = [
+            {
+                title: "House of Flame and Shadow",
+                author: "Sarah J. Maas",
+                synopsis: `Bryce Quinlan y Hunt Athalar se enfrentan a un nuevo enemigo que amenaza con arrasar Lunathion. Viejos aliados regresan mientras cada decisión redefine el destino del multiverso de Maas.`,
+                review: `Un torbellino de fantasía urbana y romance de alto voltaje. Maas entrelaza batallas colosales con vínculos emocionales intensos, manteniendo a los lectores al filo del asiento.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(255, 184, 0, 0.4), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 65, 108, 0.35), transparent 55%), #211f3b"
+            },
+            {
+                title: "Fourth Wing",
+                author: "Rebecca Yarros",
+                synopsis: `Violet Sorrengail se enfrenta al brutal Colegio de Guerra de Basgiath, donde los jinetes de dragones arriesgan la vida para reclamar un puesto entre las fuerzas de élite del imperio. Intrigas y secretos amenazan con incendiarlo todo.`,
+                review: `Una mezcla de fantasía militar y romance que ha arrasado en las listas. Las escenas de entrenamiento son electrizantes y los giros políticos mantienen la tensión capítulo a capítulo.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(108, 99, 255, 0.45), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 99, 146, 0.4), transparent 55%), #151a3b"
+            },
+            {
+                title: "Iron Flame",
+                author: "Rebecca Yarros",
+                synopsis: `La guerra contra los rebeldes se intensifica y Violet debe consolidar alianzas improbables mientras aprende a dominar su nueva magia. La línea entre amigos y enemigos se difumina en un imperio al borde del colapso.`,
+                review: `Una secuela que expande el mundo y sube las apuestas. Combina romance, batallas épicas y una protagonista que evoluciona con cada decisión difícil.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(255, 94, 98, 0.4), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 168, 0, 0.35), transparent 55%), #2b1121"
+            },
+            {
+                title: "The Women",
+                author: "Kristin Hannah",
+                synopsis: `Frances "Frankie" McGrath se une al cuerpo de enfermeras del Ejército durante la guerra de Vietnam y descubre un mundo marcado por el sacrificio y la sororidad, así como las secuelas del regreso a casa.`,
+                review: `Kristin Hannah entrega un drama histórico conmovedor que honra a las mujeres que sirvieron en Vietnam. La narrativa resalta la resiliencia y las cicatrices invisibles de la guerra.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(0, 146, 214, 0.45), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.3), transparent 55%), #10304a"
+            },
+            {
+                title: "The Heaven & Earth Grocery Store",
+                author: "James McBride",
+                synopsis: `En 1972, el hallazgo de un esqueleto en Pensilvania destapa la historia de una comunidad que se unió décadas atrás para proteger a un niño sordo de la injusticia institucional.`,
+                review: `McBride combina humor, ternura y crítica social en una novela coral donde la compasión vence a los prejuicios. Una carta de amor a las comunidades marginadas.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(70, 214, 123, 0.4), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 221, 89, 0.35), transparent 55%), #11311d"
+            },
+            {
+                title: "Happy Place",
+                author: "Emily Henry",
+                synopsis: `Harriet y Wyn fingen seguir juntos durante una última semana en la casa de playa que comparten con sus mejores amigos. Entre juegos, confesiones y recuerdos, deberán decidir si su historia merece otra oportunidad.`,
+                review: `Emily Henry vuelve a demostrar su habilidad para capturar relaciones complejas con humor y calidez. Un romance contemporáneo emotivo sobre segundas oportunidades y amistad.`,
+                panelGradient:
+                    "radial-gradient(circle at top left, rgba(255, 132, 193, 0.4), transparent 60%), radial-gradient(circle at bottom right, rgba(255, 212, 132, 0.4), transparent 55%), #a22563"
+            }
+        ];
+
+
+        let currentIndex = 0;
+
+        const bookTitle = document.getElementById("book-title");
+        const bookAuthor = document.getElementById("book-author");
+        const bookSynopsis = document.getElementById("book-synopsis");
+        const bookReview = document.getElementById("book-review");
+        const detailsTitle = document.getElementById("details-title");
+        const bookPanel = document.getElementById("book-panel");
+        const bookCounter = document.getElementById("book-counter");
+        const totalBooks = books.length;
+
+        function renderBook(index) {
+            const { title, author, synopsis, review, panelGradient } = books[index];
+            bookTitle.textContent = title;
+            bookAuthor.textContent = `de ${author}`;
+            bookSynopsis.textContent = synopsis;
+            bookReview.textContent = review;
+            detailsTitle.textContent = title;
+            bookCounter.textContent = `Libro ${index + 1} de ${totalBooks}`;
+            bookPanel.style.setProperty("--panel-bg", panelGradient);
+            bookPanel.setAttribute("aria-label", `Mostrar otro libro. Ahora leyendo ${title} de ${author}`);
+        }
+
+        function showNextBook() {
+            currentIndex = (currentIndex + 1) % books.length;
+            renderBook(currentIndex);
+        }
+
+        bookPanel.addEventListener("click", showNextBook);
+
+        bookPanel.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                showNextBook();
+            }
+        });
+
+        renderBook(currentIndex);
+    </script>
+</body>
+</html>
