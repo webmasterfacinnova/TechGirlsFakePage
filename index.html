@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constelación de Libros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <h1>Constelación de Libros</h1>
+      <p>Descubre mundos, historias y melodías que resuenan con tu imaginación.</p>
+      <a class="btn btn--primary" href="#biblioteca">Explorar recomendaciones</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="biblioteca" class="section">
+      <div class="section__header">
+        <h2>Biblioteca Estelar</h2>
+        <p>Elige un libro para conocer un resumen sin spoilers y una playlist con la vibra perfecta.</p>
+      </div>
+      <div class="filters">
+        <button class="chip active" data-genre="todos">Todos</button>
+        <button class="chip" data-genre="fantasía">Fantasía</button>
+        <button class="chip" data-genre="ficción">Ficción</button>
+        <button class="chip" data-genre="romance">Romance</button>
+        <button class="chip" data-genre="misterio">Misterio</button>
+      </div>
+      <div class="book-grid" id="bookGrid"></div>
+    </section>
+
+    <section class="section section--split">
+      <div class="panel panel--info">
+        <h3>Consejo Galáctico</h3>
+        <p>
+          Responde a unas cuantas preguntas para conocer tu mezcla ideal de libros y música.
+        </p>
+        <form id="vibeForm" class="vibe-form">
+          <label for="energy">¿Qué nivel de energía buscas?</label>
+          <select id="energy" required>
+            <option value="">Elige una opción</option>
+            <option value="serena">Serena y contemplativa</option>
+            <option value="media">Equilibrada</option>
+            <option value="alta">Intensa y épica</option>
+          </select>
+
+          <label for="emotion">¿Qué emoción quieres explorar?</label>
+          <select id="emotion" required>
+            <option value="">Elige una emoción</option>
+            <option value="romántica">Romántica</option>
+            <option value="misteriosa">Misteriosa</option>
+            <option value="aventurera">Aventurera</option>
+            <option value="nostálgica">Nostálgica</option>
+          </select>
+
+          <label for="companion">¿Prefieres leer?</label>
+          <select id="companion" required>
+            <option value="">Selecciona</option>
+            <option value="sola">En solitario, con una taza de té</option>
+            <option value="pareja">Acompañada de alguien especial</option>
+            <option value="grupo">Con tu club de lectura</option>
+          </select>
+
+          <button type="submit" class="btn btn--secondary">Dame mi mezcla</button>
+        </form>
+        <div id="vibeResult" class="vibe-result" aria-live="polite"></div>
+      </div>
+
+      <div class="panel panel--chat">
+        <h3>Constelación Anónima</h3>
+        <p>Comparte recomendaciones, playlists y sentimientos con otras viajeras de historias.</p>
+        <form id="chatForm" class="chat-form">
+          <label for="chatMessage">¿Qué descubriste hoy?</label>
+          <textarea id="chatMessage" rows="3" placeholder="Comparte sin spoilers y sin nombres..." required></textarea>
+          <button type="submit" class="btn btn--primary">Enviar al universo</button>
+        </form>
+        <ul id="chatFeed" class="chat-feed"></ul>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="bookModal" class="modal">
+    <div class="modal__content">
+      <button class="modal__close" id="modalClose" aria-label="Cerrar">×</button>
+      <div class="modal__header">
+        <h2 id="modalTitle"></h2>
+        <span id="modalGenre" class="modal__genre"></span>
+      </div>
+      <p id="modalSummary" class="modal__summary"></p>
+      <div class="modal__playlist">
+        <h3>Playlist recomendada</h3>
+        <ul id="modalPlaylist"></ul>
+      </div>
+    </div>
+  </dialog>
+
+  <footer class="footer">
+    <p>Hecho con amor, libros y música para TechGirls.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
