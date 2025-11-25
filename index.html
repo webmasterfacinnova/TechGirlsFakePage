@@ -6,11 +6,15 @@
   <title>Escenario Urbano - TechGirls</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Barlow+Condensed:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="stage">
+    <div class="stage-backdrop" aria-hidden="true"></div>
+    <div class="stage-floor" aria-hidden="true"></div>
     <div class="curtain curtain-left"></div>
     <div class="curtain curtain-right"></div>
 
@@ -65,9 +69,19 @@
     </div>
 
     <section class="actions" aria-label="Acciones principales">
-      <a href="#" class="action-button audition">Audicionar<br><small>Buscar trabajos</small></a>
-      <a href="#" class="action-button skills">Aprender habilidades</a>
-      <a href="#" class="action-button missions">Misiones del día</a>
+      <button class="action-graffiti audition" aria-label="Audicionar y buscar trabajos">
+        <span class="action-text">Audicionar</span>
+        <span class="action-sub">Buscar trabajos</span>
+        <span class="spray"></span>
+      </button>
+      <button class="action-graffiti skills" aria-label="Aprender nuevas habilidades">
+        <span class="action-text">Aprender habilidades</span>
+        <span class="spray"></span>
+      </button>
+      <button class="action-graffiti missions" aria-label="Ver misiones del día">
+        <span class="action-text">Misiones del día</span>
+        <span class="spray"></span>
+      </button>
     </section>
   </div>
 
