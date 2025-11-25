@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escenario Urbano - TechGirls</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee+Inline&family=Barlow+Condensed:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="stage">
+    <div class="stage-backdrop" aria-hidden="true"></div>
+    <div class="stage-floor" aria-hidden="true"></div>
+    <div class="curtain curtain-left"></div>
+    <div class="curtain curtain-right"></div>
+
+    <div class="stage-details">
+      <div class="detail box"></div>
+      <div class="detail ladder"></div>
+      <div class="detail cone cone-left"></div>
+      <div class="detail cone cone-right"></div>
+      <div class="detail hanging-tag"></div>
+    </div>
+
+    <div class="spotlight spotlight-1"></div>
+    <div class="spotlight spotlight-2"></div>
+    <div class="spotlight spotlight-3"></div>
+
+    <div class="mural" aria-label="Mural urbano interactivo">
+      <button class="graffiti graffiti-cafe" data-graffiti="cafe">
+        <span class="label">Trabajos de Cafetería</span>
+        <div class="steam"></div>
+        <div class="mini-lights">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <button class="graffiti graffiti-logistica" data-graffiti="logistica">
+        <span class="label">Logística</span>
+        <div class="tape"></div>
+        <div class="mini-lights">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <button class="graffiti graffiti-ventas" data-graffiti="ventas">
+        <span class="label">Ventas</span>
+        <div class="pulse"></div>
+        <div class="mini-lights">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <button class="graffiti graffiti-oficios" data-graffiti="oficios">
+        <span class="label">Oficios</span>
+        <div class="cog"></div>
+        <div class="mini-lights">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+      <button class="graffiti graffiti-creativa" data-graffiti="creativa">
+        <span class="label">Creativa</span>
+        <div class="paint"></div>
+        <div class="mini-lights">
+          <span></span><span></span><span></span>
+        </div>
+      </button>
+    </div>
+
+    <section class="actions" aria-label="Acciones principales">
+      <button class="action-graffiti audition" aria-label="Audicionar y buscar trabajos">
+        <span class="action-text">Audicionar</span>
+        <span class="action-sub">Buscar trabajos</span>
+        <span class="spray"></span>
+      </button>
+      <button class="action-graffiti skills" aria-label="Aprender nuevas habilidades">
+        <span class="action-text">Aprender habilidades</span>
+        <span class="spray"></span>
+      </button>
+      <button class="action-graffiti missions" aria-label="Ver misiones del día">
+        <span class="action-text">Misiones del día</span>
+        <span class="spray"></span>
+      </button>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>El escenario se transforma según la hora del día. Descubre nuevas vibras en cada visita.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
